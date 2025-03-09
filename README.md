@@ -1,122 +1,85 @@
-1️⃣ Complex Job Search Queries
-💡 Problem: Users don’t just say, “Find me a job.” They have complex, unclear, or multi-step requests.
-✅ How the Reasoning Agent Helps:
+# AI Job Agent - Multi-Agent System
 
-If a user says, "I want an AI job that pays well, but I don’t have TensorFlow skills. What can I do?"
-Step 1: Search high-paying AI jobs.
-Step 2: Check if the user’s resume matches the job requirements.
-Step 3: Identify missing skills (like TensorFlow).
-Step 4: Suggest courses or projects to learn TensorFlow.
-2️⃣ Personalized Job Recommendations
-💡 Problem: Users don’t always know what jobs fit them.
-✅ How the Reasoning Agent Helps:
+This project implements an AI Job Agent using a multi-agent approach. It leverages LangChain and LangGraph to create a system that can understand user job search requests, retrieve relevant job using RAg pipeline or web search and resume information, and provide career advice.
 
-If a user says, "I want a remote job, but I’m open to freelancing too."
-Step 1: Find remote full-time jobs.
-Step 2: Also find high-paying freelance gigs.
-Step 3: Compare salaries and stability of both.
-Step 4: Provide a pros & cons analysis of full-time vs freelance.
-3️⃣ Resume Optimization & Skill Gap Analysis
-💡 Problem: Users don’t know why they get rejected.
-✅ How the Reasoning Agent Helps:
+## Architecture
 
-If a user says, "Why am I not getting interview calls?"
-Step 1: Analyze their resume against job descriptions.
-Step 2: Identify missing skills.
-Step 3: Suggest ways to improve (courses, certifications, projects).
-Step 4: Offer an AI-generated resume rewrite.
-4️⃣ Job Application Automation
-💡 Problem: Users hate filling out applications manually.
-✅ How the Reasoning Agent Helps:
+The system follows a multi-agent architecture as depicted in the image:
+![alt text](architecture.png)
 
-If a user says, "Apply to all relevant jobs for me!"
-Step 1: Find matching jobs.
-Step 2: Check if the user’s resume fits.
-Step 3: Auto-fill applications using stored data.
-Step 4: Track all applications and notify when a recruiter responds.
-5️⃣ Salary & Market Insights
-💡 Problem: Users don’t know if a job pays fairly.
-✅ How the Reasoning Agent Helps:
+* **Supervisor Agent (Supervisor):** This agent acts as the orchestrator. It interprets user requests, autonomously asks for further information if needed, breaks down the request into tasks, and directs the flow between the Retrieval Agent and Resume Agent.
+* **Retrieval Agent:** This agent retrieves job listings and resume information using LLMs and a Retrieval Augmented Generation (RAG) pipeline or web search if no relevant information is found. It utilizes semantic search for improved accuracy and formats the retrieved information and better job matching.
+* **Resume Agent:** This agent provides career advice on tailoring resumes and can update resumes based on job market trends foud by the Retrival agent.
 
-If a user says, "Is $80K a good salary for a software engineer?"
-Step 1: Fetch salary data for software engineers in the same location.
-Step 2: Compare with industry averages.
-Step 3: Suggest better-paying roles if available.
-Step 4: Provide negotiation tips if the offer is below average.
+## Technology Stack
 
-6️⃣ Career Path Guidance
-💡 Problem: Users don’t know what to do next in their careers.
-✅ How the Reasoning Agent Helps:
+* **LangChain Core:** Core abstractions for building LLM-powered applications.
+* **LangGraph:** Framework for building stateful, multi-actor applications with LLMs.
+* **LangChain Community:** Integrations with various third-party services and tools.
+* **LangChain Groq:** Integration with the Groq platform for accelerated inference.
+* **LangChain Experimental:** Experimental features and modules.
+* **Weaviate Client:** Vector database for semantic search and RAG.
+* **Torch:** Deep learning framework for model training and inference.
+* **Sentence Transformers:** Library for generating sentence embeddings.
+* **Python Jobspy:** Library for scraping job listings from various sources.
+* **Flask:** Web framework for creating the API.
+* **Pandas:** Data analysis and manipulation library.
 
-If a user says, "I’m a data analyst. How do I become a data scientist?"
-Step 1: Compare data analyst vs. data scientist job descriptions.
-Step 2: Identify missing skills (like deep learning, Python).
-Step 3: Suggest courses or certifications.
-Step 4: Recommend entry-level data scientist jobs for a smooth transition.
+## Getting Started
 
+1.  **Clone the repository:**
 
+    ```bash
+    git clone <repository_url>
+    cd ai-job-agent
+    ```
 
+2.  **Install dependencies:**
 
+    ```bash
+    pip install -r requirements.txt
+    ```
 
+3.  **Set up environment variables:**
 
+    * `WEAVIATE_URL`: URL of your Weaviate instance.
+    * `WEAVIATE_API_KEY`: API key for your Weaviate instance (if applicable).
+    * `GROQ_API_KEY`: API key for Groq platform (if using Groq).
+    * Other necessary API keys or configurations.
 
+4.  **Run the application:**
 
+    ```bash
+    python main.py
+    ```
 
+    The application will start a Flask server, and you can interact with the AI Job Agent through the API endpoints.
 
-https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/multi_agent/agent_supervisor.ipynb
-https://langchain-ai.github.io/langgraph/concepts/multi_agent/#multi-agent-architectures
+## Entry Point
 
+The main entry point for the application is `main.py`. This file initializes the agents, sets up the LangGraph workflow, and starts the Flask server.
 
-intent_and_orchestration_prompt_tmpl = """
-### Role:
-You are a smart AI assistant that understands user job search needs, gathers necessary metadata, and orchestrates tasks for the Retrieval Agent and Resume Customizer Agent.
+## Usage
 
-### Goals:
-1. **Clarify vague queries:** If user input lacks key details (e.g., location, degree, skills), ask for them.  
-2. **Determine the intent:** Identify if this is a **simple job search** or if additional resume customization is needed.  
-3. **Generate a structured search query** for the Retrieval Agent.  
-4. **Decide if the Resume Customizer Agent should be called.**  
-5. **Orchestrate execution and return results to the user.**  
+Provide examples of how to interact with the API or use the application. Include sample requests and expected responses.
 
----
+## Future Enhancements
 
-### **Step 1: Understanding User Intent**
-Analyze the user's query and categorize it into one of the following:  
-- **Simple Job Search** (just retrieve jobs).  
-- **Job Search + Resume Optimization** (retrieve jobs and improve the resume).  
+* Implement user authentication and authorization.
+* Add support for more job boards and resume formats.
+* Improve the accuracy and efficiency of the RAG pipeline.
+* Add more features to the Resume Agent, such as cover letter generation and interview preparation.
+* Deploy the application to a cloud platform for scalability and availability.
 
-If intent is unclear, ask follow-up questions.
+## Contributing
 
----
+Contributions are welcome! Please submit a pull request or open an issue for any bugs or feature requests.
 
-### **Step 2: Collecting Missing Metadata**
-Ask the user for missing details only if they are essential for a good search:  
-- 🌍 **Location** (if job type is not remote).  
-- 🎓 **Degree/Education** (if relevant to job matching).  
-- 🛠 **Skills** (if user didn't mention them).  
-- 💼 **Experience Level** (junior, mid, senior).  
+## License
 
-Example:  
-**User Query:** "Find me AI jobs"  
-**Reasoning Agent Response:** _"To provide better results, could you confirm your location and key skills?"_  
+[Specify the license for your project]
 
-Once all necessary metadata is collected, proceed.
+## Contact
 
----
-
-### **Step 3: Generating a Search Query for the Retrieval Agent**
-After understanding the user's need, construct a **well-structured search query** for the Retrieval Agent.  
-
-#### **Example Search Query Format:**
-```json
-{
-  "job_title": "Machine Learning Engineer",
-  "location": "San Francisco, CA",
-  "skills": ["Python", "TensorFlow", "NLP"],
-  "experience_level": "Entry-Level"
-}
-
-
-
-**User Query:**
-"""
+[Your Name/Organization]
+[Email Address]
