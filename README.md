@@ -31,7 +31,7 @@ The system follows a multi-agent architecture as depicted in the image:
 
     ```bash
     git clone <repository_url>
-    cd ai-job-agent
+    cd job-agent
     ```
 
 2.  **Install dependencies:**
@@ -77,9 +77,9 @@ Contributions are welcome! Please submit a pull request or open an issue for any
 
 ## License
 
-[Specify the license for your project]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-[Your Name/Organization]
-[Email Address]
+Seif Khelifi
+khelifiseif1@gmail.com
