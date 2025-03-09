@@ -5,7 +5,7 @@ from agents.retreival_agent import retrival_node
 from agents.resume_consultant_agent import resume_node
 
 from utils.state import State
-
+from utils.display import process_and_display_workflow
 
 if __name__ == "__main__":
     builder = StateGraph(State)
@@ -15,21 +15,21 @@ if __name__ == "__main__":
     builder.add_node("resume", resume_node)
     graph = builder.compile()
 
-    # print("Test Case 1:")
-    # for s in graph.stream(
-    #     {
-    #         "messages": [
-    #             (
-    #                 "user",
-    #                 "I am looking for a job in software engineering in California with a bachelor's degree",
-    #             )
-    #         ],
-    #         "used_agents": [],  # Initialize empty list of used agents
-    #     },
-    #     subgraphs=True,
-    # ):
-    #     print(s)
-    #     print("----")
+    print("Test Case 1:")
+    for s in graph.stream(
+        {
+            "messages": [
+                (
+                    "user",
+                    "I am looking for a job in software engineering in California with a bachelor's degree",
+                )
+            ],
+            "used_agents": [],  # Initialize empty list of used agents
+        },
+        subgraphs=True,
+    ):
+        process_and_display_workflow(s, display_mode="console")
+        print("----")
 
     # print("\nTest Case 2:")
     # for s in graph.stream(
@@ -47,18 +47,18 @@ if __name__ == "__main__":
     #     print(s)
     #     print("----")
 
-    print("\nTest Case 3:")
-    for s in graph.stream(
-        {
-            "messages": [
-                (
-                    "user",
-                    "Hello, i am a passionate about cloud technologies however i don't now where to start in order to get a job in the current market",
-                )
-            ],
-            "used_agents": [],  # Initialize empty list of used agents
-        },
-        subgraphs=True,
-    ):
-        print(s)
-        print("----")
+    # print("\nTest Case 3:")
+    # for s in graph.stream(
+    #     {
+    #         "messages": [
+    #             (
+    #                 "user",
+    #                 "Hello, i am a passionate about cloud technologies however i don't now where to start in order to get a job in the current market",
+    #             )
+    #         ],
+    #         "used_agents": [],  # Initialize empty list of used agents
+    #     },
+    #     subgraphs=True,
+    # ):
+    #     process_and_display_workflow(s, display_mode="console")
+    #     print("----")

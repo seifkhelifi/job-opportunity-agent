@@ -5,6 +5,7 @@ This project implements an AI Job Agent using a multi-agent approach. It leverag
 ## Architecture
 
 The system follows a multi-agent architecture as depicted in the image:
+
 ![alt text](architecture.png)
 
 * **Supervisor Agent (Supervisor):** This agent acts as the orchestrator. It interprets user requests, autonomously asks for further information if needed, breaks down the request into tasks, and directs the flow between the Retrieval Agent and Resume Agent.
@@ -62,14 +63,6 @@ The main entry point for the application is `main.py`. This file initializes the
 ## Usage
 
 Provide examples of how to interact with the API or use the application. Include sample requests and expected responses.
-
-## Future Enhancements
-
-* Implement user authentication and authorization.
-* Add support for more job boards and resume formats.
-* Improve the accuracy and efficiency of the RAG pipeline.
-* Add more features to the Resume Agent, such as cover letter generation and interview preparation.
-* Deploy the application to a cloud platform for scalability and availability.
 
 ## Contributing
 
