@@ -1,0 +1,11 @@
+langchain_core
+langgraph 
+langchain_community 
+langchain_groq 
+langchain_experimental
+weaviate-client
+torch
+sentence-transformers
+python-jobspy
+flask
+pandas
